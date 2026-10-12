@@ -262,8 +262,8 @@ export function createModel({ state: layerState, services, parts, source }) {
         loadingLabel: fetching
           ? 'Syncing flow · Roads: TomTom'
           : coveragePct > 0
-            ? 'LIVE · Roads: TomTom · Roads without flow hidden'
-            : 'LIVE · Roads: TomTom · No flow roads in view',
+            ? 'LIVE ROAD CONDITIONS · TomTom flow · synthetic vehicles disabled'
+            : 'NO LIVE FLOW ROADS IN VIEW · synthetic vehicles disabled',
       };
     }
     if (liveMode && roadSource === 'TomTom + OpenStreetMap') {
@@ -272,7 +272,7 @@ export function createModel({ state: layerState, services, parts, source }) {
         error: null,
         loadingLabel: fetching
           ? `Syncing flow · Roads: ${roadSource}`
-          : `${coveragePct > 0 ? 'LIVE' : 'SIMULATED'} · Roads: ${roadSource} · Flow ${coveragePct}%`,
+          : `${coveragePct > 0 ? 'LIVE ROAD CONDITIONS' : 'NO LIVE FLOW MATCHES'} · ${roadSource} · ${coveragePct}% matched · synthetic vehicles disabled`,
       };
     }
     if (liveMode) {
@@ -282,8 +282,8 @@ export function createModel({ state: layerState, services, parts, source }) {
         loadingLabel: fetching
           ? 'Syncing flow · Roads: OpenStreetMap · Flow: TomTom · Unmatched: simulated'
           : coveragePct > 0
-            ? `LIVE · Roads: OpenStreetMap · Flow: TomTom · ${coveragePct}% cov${coveragePct < 100 ? ' · Unmatched: simulated' : ''}`
-            : 'SIMULATED · Roads: OpenStreetMap · Flow: TomTom (no matches)',
+            ? `LIVE ROAD CONDITIONS · OpenStreetMap geometry · TomTom flow · ${coveragePct}% matched`
+            : 'NO LIVE FLOW MATCHES IN VIEW · synthetic vehicles disabled',
       };
     }
     // Keyless simulation — one terse line that names the mode and the remedy
@@ -293,8 +293,8 @@ export function createModel({ state: layerState, services, parts, source }) {
       mode,
       error: null,
       loadingLabel: statusUnavailable
-        ? 'SIMULATED — traffic service unreachable'
-        : 'SIMULATED — add TomTom key for live',
+        ? 'NO LIVE TRAFFIC DATA — traffic service unreachable; synthetic vehicles disabled'
+        : 'NO LIVE TRAFFIC DATA — add TomTom key to show real congestion; synthetic vehicles disabled',
     };
   }
 
