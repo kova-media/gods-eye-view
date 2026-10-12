@@ -251,7 +251,7 @@ export function createModel({ state: layerState, services, parts, source }) {
       // drops `loadingLabel` in its error branch, so the owner's SIMULATED copy
       // has to BE the error text or the steady state reverts to a bare
       // "TomTom daily budget reached" that never says what is on screen.
-      const degraded = `SIMULATED — ${flowError}`;
+      const degraded = `NO LIVE TRAFFIC DATA — ${flowError}; synthetic vehicles disabled`;
       return { mode, error: degraded, loadingLabel: degraded };
     }
     // TomTom and Hybrid name their geometry; OpenStreetMap keeps its match copy.
@@ -307,7 +307,7 @@ export function createModel({ state: layerState, services, parts, source }) {
    */
 
   function recolorDotsInPlace(label) {
-    if (!layerState._liveMode || !layerState._dots.length) return;
+    if (!layerState._liveMode) return;
     layerState._bucketCounts = { free: 0, slow: 0, jam: 0, sim: 0 };
     let closedDots = 0;
     const now = Date.now();
