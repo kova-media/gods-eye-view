@@ -140,7 +140,11 @@ export function createStyle({ state: layerState, services, parts, source }) {
   /** @returns {boolean} Heat-line prototype active. */
 
   function heatlineOn() {
-    return layerState._jamViz === 'heatline' || layerState._jamViz === 'both';
+    return (
+      layerState._realTrafficOnly ||
+      layerState._jamViz === 'heatline' ||
+      layerState._jamViz === 'both'
+    );
   }
   return {
     presetProfileActive,
