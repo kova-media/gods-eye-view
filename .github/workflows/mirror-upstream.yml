@@ -28,6 +28,9 @@ jobs:
         shell: bash
         run: |
           cp .github/workflows/mirror-upstream.yml /tmp/mirror-upstream.yml
+          # The GitHub App token cannot add upstream workflow files without the
+          # separate Workflows permission, so keep this repository's own workflow.
+          rm -rf /tmp/gods-eye-view-upstream/.github/workflows
           rsync -a --delete --exclude='.git/' /tmp/gods-eye-view-upstream/ ./
           mkdir -p .github/workflows
           cp /tmp/mirror-upstream.yml .github/workflows/mirror-upstream.yml
