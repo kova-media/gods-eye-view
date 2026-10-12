@@ -1,0 +1,42 @@
+name: Sync upstream God's Eye View
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-upstream
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out this repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Clone upstream source
+        run: git clone --depth 1 https://github.com/bilawalsidhu/gods-eye-view.git /tmp/gods-eye-view-upstream
+
+      - name: Copy the complete project into this repository
+        shell: bash
+        run: |
+          cp .github/workflows/mirror-upstream.yml /tmp/mirror-upstream.yml
+          rsync -a --delete --exclude='.git/' /tmp/gods-eye-view-upstream/ ./
+          mkdir -p .github/workflows
+          cp /tmp/mirror-upstream.yml .github/workflows/mirror-upstream.yml
+          git add --all
+          if git diff --cached --quiet; then
+            echo "Repository already matches upstream."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Mirror upstream God's Eye View source"
+          git push origin HEAD:main
