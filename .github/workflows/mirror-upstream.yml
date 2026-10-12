@@ -27,13 +27,13 @@ jobs:
       - name: Copy the complete project into this repository
         shell: bash
         run: |
-          cp .github/workflows/mirror-upstream.yml /tmp/mirror-upstream.yml
-          # The GitHub App token cannot add upstream workflow files without the
-          # separate Workflows permission, so keep this repository's own workflow.
+          cp -a .github/workflows /tmp/repo-workflows
+          # Keep this repository's workflows: the GitHub App token cannot add
+          # or remove workflow files without the separate Workflows permission.
           rm -rf /tmp/gods-eye-view-upstream/.github/workflows
           rsync -a --delete --exclude='.git/' /tmp/gods-eye-view-upstream/ ./
-          mkdir -p .github/workflows
-          cp /tmp/mirror-upstream.yml .github/workflows/mirror-upstream.yml
+          rm -rf .github/workflows
+          cp -a /tmp/repo-workflows .github/workflows
           git add --all
           if git diff --cached --quiet; then
             echo "Repository already matches upstream."
