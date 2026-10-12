@@ -31,7 +31,7 @@ jobs:
           # Keep this repository's workflows: the GitHub App token cannot add
           # or remove workflow files without the separate Workflows permission.
           rm -rf /tmp/gods-eye-view-upstream/.github/workflows
-          rsync -a --delete --exclude='.git/' /tmp/gods-eye-view-upstream/ ./
+          rsync -a --delete --exclude='.git/' --exclude='/api/cctv/' --exclude='/src/ui/styles/user-friendly.css' --exclude='/style.css' /tmp/gods-eye-view-upstream/ ./
           rm -rf .github/workflows
           cp -a /tmp/repo-workflows .github/workflows
           git add --all
