@@ -38,15 +38,6 @@ export class CctvControls {
     this._calibrationEdit = null;
     this._actionGeneration = 0;
     this._initCctvPanel();
-    this.listen(document.getElementById('open-cameras-btn'), 'click', () => {
-      if (this._cctvPanel?.classList.contains('collapsed')) {
-        this._cctvPanel
-          .querySelector('[data-collapse-target="cctv-panel"]')
-          ?.click();
-      }
-      if (!this.actions.isEnabled()) this._cctvEnableBtn?.click();
-      this._cctvSelect?.focus({ preventScroll: true });
-    });
     if (this._cctvVideo && typeof MutationObserver !== 'undefined') {
       this._videoVisibilityObserver = new MutationObserver(() =>
         this._renderCctvState(this._cctvState),
