@@ -44,7 +44,7 @@ export function createControls({ state: layerState, services, parts, source }) {
 
     name: 'Live Traffic Conditions',
 
-    icon: 'traffic',
+    icon: '🚦',
 
     source: 'TomTom live flow / OpenStreetMap road geometry',
 
