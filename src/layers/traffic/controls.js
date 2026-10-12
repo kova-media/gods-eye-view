@@ -285,8 +285,16 @@ export function createControls({ state: layerState, services, parts, source }) {
         Boolean(layerState._heightPending);
       const { free, slow, jam, sim } = layerState._bucketCounts;
       const matched = free + slow + jam;
-      const flowCoveragePct =
-        matched + sim > 0 ? Math.round((100 * matched) / (matched + sim)) : 0;
+      const flowRoads = layerState._roads.filter(
+        (road) => road.flow && !road.flow.closure,
+      ).length;
+      const flowCoveragePct = layerState._realTrafficOnly
+        ? layerState._roads.length
+          ? Math.round((100 * flowRoads) / layerState._roads.length)
+          : 0
+        : matched + sim > 0
+          ? Math.round((100 * matched) / (matched + sim))
+          : 0;
       const feed = parts.model.trafficFeedPresentation({
         liveMode: layerState._liveMode,
         fetching: loading,
