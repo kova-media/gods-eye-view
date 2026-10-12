@@ -25,9 +25,6 @@ export function createState({ services }) {
   /** @type {Array<{point:Cesium.PointPrimitive, waypoints:Cesium.Cartesian3[], segmentDist:number[], numSegments:number, segIdx:number, t:number, mps:number, direction:number, stoppedUntil:number}>} Active animated dots */
 
   layerState._dots = [];
-  // Do not present animated synthetic markers as real vehicles. The traffic layer
-  // defaults to showing only road conditions supported by live provider data.
-  layerState._realTrafficOnly = true;
   layerState._nextDotId = 1;
   layerState._motion = {
     publishes: 0,

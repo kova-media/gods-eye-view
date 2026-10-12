@@ -175,13 +175,11 @@ export function createRetention({ state, parts }) {
       if (record.wanted) wanted.push(record.road);
       else record.target = 0;
     }
-    const budgets = state._realTrafficOnly
-      ? wanted.map(() => 0)
-      : parts.model.allocateRoadDotBudgets(
-          wanted,
-          altitude,
-          roadDotBudget(altitude),
-        );
+    const budgets = parts.model.allocateRoadDotBudgets(
+      wanted,
+      altitude,
+      roadDotBudget(altitude),
+    );
     for (let i = 0; i < wanted.length; i++)
       records.get(wanted[i].key).target = budgets[i];
     state._roads = wanted;
