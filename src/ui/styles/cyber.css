@@ -2835,3 +2835,22 @@
     padding: 10px 12px 18px 18px;
   }
 }
+
+
+/* Owner correction: the map must be full-viewport, never a circular keyhole. */
+#scope-mask,
+:root[data-ui-theme='cyber'] #scope-mask {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+#cockpit-cloud-effects {
+  clip-path: none !important;
+  -webkit-clip-path: none !important;
+}
+
+:root[data-ui-theme='cyber'] body::after {
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
