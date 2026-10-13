@@ -148,16 +148,8 @@
     linear-gradient(90deg, var(--cyber-grid) 1px, transparent 1px);
   background-size: 116px 116px;
   background-position: center center;
-  -webkit-mask-image: radial-gradient(
-    circle at 50% 50%,
-    transparent 0 min(40vw, 52vh),
-    #000 calc(min(40vw, 52vh) + 18px)
-  );
-  mask-image: radial-gradient(
-    circle at 50% 50%,
-    transparent 0 min(40vw, 52vh),
-    #000 calc(min(40vw, 52vh) + 18px)
-  );
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 :root[data-ui-theme='cyber']
